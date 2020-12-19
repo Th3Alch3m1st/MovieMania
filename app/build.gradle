@@ -78,6 +78,10 @@ android {
             buildConfigField 'String', 'CAST_IMAGE_BASE_URL', '"https://image.tmdb.org/t/p/h632"'
 
             resValue "string", "app_name_movie", "Telnor Movie"
+            manifestPlaceholders = [
+                    appIcon: "@mipmap/ic_launcher_2",
+                    appIconRound: "@mipmap/ic_launcher_2_round"
+            ]
         }
 
         grameenphone {
@@ -91,6 +95,10 @@ android {
             buildConfigField 'String', 'CAST_IMAGE_BASE_URL', '"https://image.tmdb.org/t/p/h632"'
 
             resValue "string", "app_name", "Grameenphone Movie"
+            manifestPlaceholders = [
+                    appIcon: "@mipmap/ic_launcher",
+                    appIconRound: "@mipmap/ic_launcher_round"
+            ]
         }
 
         release {
