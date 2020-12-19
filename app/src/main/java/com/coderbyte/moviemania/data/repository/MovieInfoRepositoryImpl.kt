@@ -3,9 +3,11 @@ package com.coderbyte.moviemania.data.repository
 import android.content.Context
 import com.coderbyte.moviemania.BuildConfig
 import com.coderbyte.moviemania.data.datasource.MovieInfoAPI
+import com.coderbyte.moviemania.data.model.movie.MovieDetails
 import com.coderbyte.moviemania.data.model.movie.PopularMoviesResponse
 import com.coderbyte.moviemania.data.model.trending.TrendingContentResponse
 import com.coderbyte.moviemania.data.model.tvseries.PopularTvSeriesResponse
+import com.coderbyte.moviemania.data.model.tvseries.TvSeriesDetails
 import com.coderbyte.moviemania.data.network.onException
 import com.coderbyte.moviemania.data.session.Session
 import com.coderbyte.moviemania.di.qualifire.ApplicationContext
@@ -36,5 +38,13 @@ class MovieInfoRepositoryImpl @Inject constructor(
     override fun getTrendingContent(page: Int): Single<TrendingContentResponse> {
         return api.getTrendingContent(BuildConfig.API_KEY, "2020", "vote_average.desc", page)
             .onException(context)
+    }
+
+    override fun getMovieDetails(id: String): Single<MovieDetails> {
+        return api.getMovieDetails(id, BuildConfig.API_KEY)
+    }
+
+    override fun getSeriesDetails(id: String): Single<TvSeriesDetails> {
+        return api.getSeriesDetails(id, BuildConfig.API_KEY)
     }
 }

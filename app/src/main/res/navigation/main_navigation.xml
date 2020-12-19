@@ -10,26 +10,25 @@
         android:name="com.coderbyte.moviemania.ui.home.HomeFragment"
         android:label="Image Gallery"
         tools:layout="@layout/fragment_home">
-<!--        <action-->
-<!--            android:id="@+id/action_imageListFragment_to_detailsFragment"-->
-<!--            app:destination="@id/detailsFragment"-->
-<!--            app:enterAnim="@anim/fragment_fade_enter"-->
-<!--            app:exitAnim="@anim/fragment_fade_exit"-->
-<!--            app:popEnterAnim="@anim/fragment_fade_enter"-->
-<!--            app:popExitAnim="@anim/fragment_fade_exit" />-->
+        <action
+            android:id="@+id/home_fragment_to_content_details"
+            app:destination="@id/contentDetailsFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
     </fragment>
-<!--    <fragment-->
-<!--        android:id="@+id/detailsFragment"-->
-<!--        android:name="com.bs.androidtest.ui.details.DetailsFragment"-->
-<!--        android:label="Image Gallery"-->
-<!--        tools:layout="@layout/details_fragment">-->
-<!--        <argument-->
-<!--            android:name="id"-->
-<!--            app:argType="string" />-->
-<!--    </fragment>-->
-<!--    <fragment-->
-<!--        android:id="@+id/aboutFragment"-->
-<!--        android:name="com.bs.androidtest.ui.about.AboutFragment"-->
-<!--        android:label="About Us"-->
-<!--        tools:layout="@layout/fragment_about" />-->
+    <fragment
+        android:id="@+id/contentDetailsFragment"
+        android:name="com.coderbyte.moviemania.ui.contentdetails.ContentDetailsFragment"
+        android:label="Details"
+        tools:layout="@layout/fragment_content_details">
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="isMovie"
+            app:argType="boolean" />
+    </fragment>
+
 </navigation>

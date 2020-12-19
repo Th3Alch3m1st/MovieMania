@@ -1,11 +1,14 @@
 package com.coderbyte.moviemania.data.datasource
 
+import com.coderbyte.moviemania.data.model.movie.MovieDetails
 import com.coderbyte.moviemania.data.model.movie.PopularMoviesResponse
 import com.coderbyte.moviemania.data.model.trending.TrendingContentResponse
 import com.coderbyte.moviemania.data.model.tvseries.PopularTvSeriesResponse
+import com.coderbyte.moviemania.data.model.tvseries.TvSeriesDetails
 import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
@@ -36,4 +39,16 @@ interface MovieInfoService {
         @Query("sort_by") sortBy: String,
         @Query("page") page: Int,
     ): Single<Response<TrendingContentResponse>>
+
+    @GET("https://api.themoviedb.org/3/movie/{id}")
+    fun getMovieDetails(
+        @Path("id") id: String,
+        @Query("api_key") apiKey: String
+    ): Single<Response<MovieDetails>>
+
+    @GET("https://api.themoviedb.org/3/tv/{id}")
+    fun getSeriesDetails(
+        @Path("id") id: String,
+        @Query("api_key") apiKey: String
+    ): Single<Response<TvSeriesDetails>>
 }

@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
  * Created By Rafiqul Hasan on 19/12/20
  * Brain Station 23
  */
-class PopularTvSeriesResponse(
+data class PopularTvSeriesResponse(
     @field:SerializedName("page")
     val page: Int? = null,
 

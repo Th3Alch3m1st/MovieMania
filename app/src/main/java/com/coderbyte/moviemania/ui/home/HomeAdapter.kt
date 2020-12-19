@@ -11,16 +11,18 @@ import com.coderbyte.moviemania.data.model.trending.TrendingContent
 import com.coderbyte.moviemania.data.model.tvseries.PopularTvSeries
 import com.coderbyte.moviemania.utils.EqualSpacingItemDecoration
 import com.coderbyte.moviemania.utils.getAppDateFormat
+import com.coderbyte.moviemania.utils.setSafeOnClickListener
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.layout_popular_movies.*
 import kotlinx.android.synthetic.main.single_item_movies.*
 import org.jetbrains.anko.dimen
+import org.jetbrains.anko.toast
 
 /**
  * Created By Rafiqul Hasan on 19/12/20
  * Brain Station 23
  */
-class HomeAdapter(private val context: Context) :
+class HomeAdapter(private val context: Context, private val homeItemCallBack: HomeItemCallBack) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         const val TYPE_POPULAR_MOVIE = 0
@@ -68,17 +70,24 @@ class HomeAdapter(private val context: Context) :
                 holder.tvTitle?.text = context.getString(R.string.popular_movies)
                 if (!::adapterPopularMovies.isInitialized) {
                     adapterPopularMovies =
-                        PopularMoviesAdapter(homeItems[position].second as MutableList<PopularMovie>)
+                        PopularMoviesAdapter(
+                            homeItems[position].second as MutableList<PopularMovie>,
+                            homeItemCallBack
+                        )
                 }
                 holder.rvPopularMovies?.removeItemDecoration(itemDecoration)
                 holder.rvPopularMovies?.addItemDecoration(itemDecoration)
                 holder.rvPopularMovies.adapter = adapterPopularMovies
+
             }
             is PopularTvSeriesViewHolder -> {
                 holder.tvTitle?.text = context.getString(R.string.popular_tv_series)
                 if (!::adapterPopularTvSeries.isInitialized) {
                     adapterPopularTvSeries =
-                        PopularTvSeriesAdapter(homeItems[position].second as MutableList<PopularTvSeries>)
+                        PopularTvSeriesAdapter(
+                            homeItems[position].second as MutableList<PopularTvSeries>,
+                            homeItemCallBack
+                        )
                 }
                 holder.rvPopularMovies?.removeItemDecoration(itemDecoration)
                 holder.rvPopularMovies?.addItemDecoration(itemDecoration)
@@ -94,17 +103,31 @@ class HomeAdapter(private val context: Context) :
                 if (homeItems.getOrNull(TYPE_POPULAR_TV_SERIES) != null) {
                     ++count
                 }
-                val trendingItem = trendingList[position - count]
+                if (position - count >= 0) {
+                    val trendingItem = trendingList[position - count]
 
-                if (trendingItem.mediaType == TrendingContent.TYPE_MOVIE) {
-                    holder.tvMovieTitle?.text = trendingItem.title ?: ""
-                    holder.tvReleaseDate?.text = getAppDateFormat(trendingItem.releaseDate)
-                } else {
-                    holder.tvMovieTitle?.text = trendingItem.originalName ?: ""
-                    holder.tvReleaseDate?.text = getAppDateFormat(trendingItem.releaseDate)
+                    if (trendingItem.mediaType == TrendingContent.TYPE_MOVIE) {
+                        holder.tvMovieTitle?.text = trendingItem.title ?: ""
+                        holder.tvReleaseDate?.text = getAppDateFormat(trendingItem.releaseDate)
+                        holder.itemView.setSafeOnClickListener {
+                            trendingItem.id?.let {
+                                homeItemCallBack.onMovieClick(it.toString())
+                            } ?: run { context.toast("No Id found") }
+                        }
+                    } else {
+                        holder.tvMovieTitle?.text = trendingItem.originalName ?: ""
+                        holder.tvReleaseDate?.text = getAppDateFormat(trendingItem.releaseDate)
+                        holder.itemView?.setSafeOnClickListener {
+                            trendingItem.id?.let {
+                                homeItemCallBack.onTvSeriesClick(it.toString())
+                            } ?: run { context.toast("No Id found") }
+                        }
+                    }
+                    holder.tvPosterPath?.text = trendingItem.posterPath ?: "No path found"
+                    holder.tvVoteCount?.text = trendingItem.voteCount?.toString() ?: ""
+                }else{
+                    notifyDataSetChanged()
                 }
-                holder.tvPosterPath?.text = trendingItem.posterPath ?: "No path found"
-                holder.tvVoteCount?.text = trendingItem.voteCount?.toString() ?: ""
             }
         }
     }
@@ -118,7 +141,7 @@ class HomeAdapter(private val context: Context) :
 
     override fun getItemCount(): Int {
         var count = 0
-        
+
         if (homeItems.getOrNull(TYPE_POPULAR_MOVIE) != null) {
             ++count
         }
@@ -169,5 +192,10 @@ class HomeAdapter(private val context: Context) :
         override val containerView: View
             get() = itemView
 
+    }
+
+    interface HomeItemCallBack {
+        fun onMovieClick(id: String)
+        fun onTvSeriesClick(id: String)
     }
 }

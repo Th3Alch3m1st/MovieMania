@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <base-config cleartextTrafficPermitted="true" />
+    <base-config cleartextTrafficPermitted="false" />
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">api.themoviedb.org</domain>
+        <domain includeSubdomains="true">203.223.93.172</domain>
+        <domain includeSubdomains="true">203.223.93.176</domain>
+        <domain includeSubdomains="true">clients3.google.com</domain>
+        <domain includeSubdomains="true">172.217.163.206</domain>
     </domain-config>
 
 </network-security-config>
