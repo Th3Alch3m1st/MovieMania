@@ -8,4 +8,7 @@
     <string name="ooops">Oops!</string>
     <string name="turn_on_wifi">Turn on Wifi</string>
     <string name="msg_failed_try_again">Failed! Please try again later</string>
+
+    <string name="popular_movies">Popular Movies</string>
+    <string name="popular_tv_series">Popular TV Series</string>
 </resources>

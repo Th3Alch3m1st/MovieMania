@@ -7,6 +7,7 @@ import com.coderbyte.moviemania.BuildConfig
 import com.coderbyte.moviemania.data.session.AppPreference
 import com.coderbyte.moviemania.data.session.Session
 import com.coderbyte.moviemania.utils.Tls12SocketFactory
+import com.coderbyte.moviemania.utils.isConnected
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.GsonBuilder
 import com.ihsanbal.logging.Level
@@ -143,9 +144,16 @@ object NetworkFactory {
         return Interceptor { chain ->
             val requestBuilder = chain.request().newBuilder()
             val maxStale = 60 * 60 * 24 * 30 // Offline cache available for 30 days
-
-            requestBuilder.addHeader("Cache-Control", "public, only-if-cached, max-stale=$maxStale")
-                .removeHeader("Pragma")
+            if(isConnected(context)){
+                val maxAge = 60 // read from cache for 1 minute
+                requestBuilder.addHeader("Cache-Control", "public, max-age=$maxAge")
+            }else {
+                requestBuilder.addHeader(
+                    "Cache-Control",
+                    "public, only-if-cached, max-stale=$maxStale"
+                )
+                    .removeHeader("Pragma")
+            }
 
             chain.proceed(requestBuilder.build())
         }
@@ -156,9 +164,9 @@ object NetworkFactory {
             .loggable(BuildConfig.DEBUG)
             .setLevel(Level.BASIC)
             .log(Platform.INFO)
-            .tag("Banglalink")
-            .request("BLRequest")
-            .response("BLResponse")
+            .tag("MovieMania")
+            .request("MovieRequest")
+            .response("MovieResponse")
             .executor(Executors.newSingleThreadExecutor())
             .build()
     }

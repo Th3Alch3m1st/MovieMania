@@ -24,9 +24,4 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
     abstract fun bindSplashViewModel(viewModel: HomeViewModel): ViewModel
-
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(HomeViewModel::class)
-//    abstract fun bindHomeViewModel(viewModel: HomeViewModel): ViewModel
 }
