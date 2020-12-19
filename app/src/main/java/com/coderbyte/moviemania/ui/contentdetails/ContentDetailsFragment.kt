@@ -6,11 +6,13 @@ import com.coderbyte.moviemania.BuildConfig
 import com.coderbyte.moviemania.R
 import com.coderbyte.moviemania.base.fragment.BaseFragment
 import com.coderbyte.moviemania.base.glide.GlideApp
+import com.coderbyte.moviemania.data.model.WishListItem
 import com.coderbyte.moviemania.data.model.tvseries.GenresItem
 import com.coderbyte.moviemania.data.model.tvseries.SpokenLanguagesItem
 import com.coderbyte.moviemania.databinding.FragmentContentDetailsBinding
 import com.coderbyte.moviemania.ui.home.HomeViewModel
 import com.coderbyte.moviemania.utils.getAppDateFormat
+import com.coderbyte.moviemania.utils.setSafeOnClickListener
 import kotlinx.android.synthetic.main.fragment_content_details.*
 import java.util.*
 
@@ -47,6 +49,21 @@ class ContentDetailsFragment : BaseFragment<HomeViewModel, FragmentContentDetail
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initObserver()
+
+        initView()
+    }
+
+    private fun initView() {
+        addToWish?.setSafeOnClickListener {
+            viewModel?.addOrRemoveWishListItem(WishListItem(contentId, ""))
+        }
+
+        val item = viewModel?.getWishListItem()?.find { it.id == contentId }
+        item?.let {
+            addToWish?.isChecked = true
+        } ?: run {
+            addToWish?.isChecked = false
+        }
     }
 
     private fun initObserver() {

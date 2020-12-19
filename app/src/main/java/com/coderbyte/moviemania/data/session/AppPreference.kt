@@ -1,32 +1,30 @@
 package com.coderbyte.moviemania.data.session
 
 import android.content.SharedPreferences
-import com.coderbyte.moviemania.data.session.Session.Companion.FCM_TOKEN
-import com.coderbyte.moviemania.data.session.Session.Companion.REFRESH_TOKEN
-import com.coderbyte.moviemania.data.session.Session.Companion.TOKEN
+import com.coderbyte.moviemania.data.model.WishListItem
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import javax.inject.Inject
 
 class AppPreference @Inject constructor(private val preferences: SharedPreferences) :
     Session {
     private val gson by lazy { GsonBuilder().create() }
 
-    override var token: String
-        get() = getString(TOKEN)
-        set(value) {
-            write(TOKEN, value)
+    override var wishListItem: MutableList<WishListItem>
+        get() {
+            val listType = object : TypeToken<MutableList<WishListItem>>() {}.type
+            return try {
+                Gson().fromJson(
+                    getString(Session.WISH_LIST_ITEM),
+                    listType
+                ) as MutableList<WishListItem>? ?: mutableListOf()
+            } catch (ex: Exception) {
+                mutableListOf()
+            }
         }
-
-    override var fcmToken: String
-        get() = getString(FCM_TOKEN)
         set(value) {
-            write(FCM_TOKEN, value)
-        }
-
-    override var refreshToken: String
-        get() = getString(REFRESH_TOKEN)
-        set(value) {
-            write(REFRESH_TOKEN, value)
+            saveObject(Session.WISH_LIST_ITEM, value)
         }
 
     private fun write(key: String, value: Any): Boolean {
@@ -68,4 +66,6 @@ class AppPreference @Inject constructor(private val preferences: SharedPreferenc
             remove(key).apply()
         }
     }
+
+
 }

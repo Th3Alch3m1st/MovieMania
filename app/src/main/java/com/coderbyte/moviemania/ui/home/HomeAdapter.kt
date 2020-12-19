@@ -1,6 +1,8 @@
 package com.coderbyte.moviemania.ui.home
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +18,7 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.layout_popular_movies.*
 import kotlinx.android.synthetic.main.single_item_movies.*
 import org.jetbrains.anko.dimen
+import org.jetbrains.anko.runOnUiThread
 import org.jetbrains.anko.toast
 
 /**
@@ -126,7 +129,10 @@ class HomeAdapter(private val context: Context, private val homeItemCallBack: Ho
                     holder.tvPosterPath?.text = trendingItem.posterPath ?: "No path found"
                     holder.tvVoteCount?.text = trendingItem.voteCount?.toString() ?: ""
                 }else{
-                    notifyDataSetChanged()
+                    Handler(Looper.getMainLooper())?.postDelayed({
+                        notifyDataSetChanged()
+
+                    },1000)
                 }
             }
         }

@@ -2,12 +2,14 @@ package com.coderbyte.moviemania.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import com.coderbyte.moviemania.base.viewmodel.BaseViewModel
+import com.coderbyte.moviemania.data.model.WishListItem
 import com.coderbyte.moviemania.data.model.movie.MovieDetails
 import com.coderbyte.moviemania.data.model.movie.PopularMoviesResponse
 import com.coderbyte.moviemania.data.model.trending.TrendingContentResponse
 import com.coderbyte.moviemania.data.model.tvseries.PopularTvSeriesResponse
 import com.coderbyte.moviemania.data.model.tvseries.TvSeriesDetails
 import com.coderbyte.moviemania.data.repository.MovieInfoRepository
+import com.coderbyte.moviemania.data.session.Session
 import com.coderbyte.moviemania.utils.withScheduler
 import javax.inject.Inject
 
@@ -15,7 +17,7 @@ import javax.inject.Inject
  * Created By Rafiqul Hasan on 19/12/20
  * Brain Station 23
  */
-class HomeViewModel @Inject constructor(private val movieRepository: MovieInfoRepository) :
+class HomeViewModel @Inject constructor(private val movieRepository: MovieInfoRepository,private val session:Session) :
     BaseViewModel() {
     var request = 0
     var response = 0
@@ -103,5 +105,19 @@ class HomeViewModel @Inject constructor(private val movieRepository: MovieInfoRe
                 toastMessage.value = it.message ?: "Something went Wrong"
             })
         compositeDisposable.add(disposable)
+    }
+    fun getWishListItem():MutableList<WishListItem>{
+        return session.wishListItem
+    }
+    fun addOrRemoveWishListItem(wishListItem:WishListItem){
+        val itemList = getWishListItem()
+        val item = itemList.find { it.id == wishListItem.id }
+        item?.let {
+            itemList.remove(it)
+        } ?: run{
+            itemList.add(wishListItem)
+        }
+
+        session.wishListItem = itemList
     }
 }
