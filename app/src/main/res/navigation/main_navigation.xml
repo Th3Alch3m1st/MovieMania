@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation.xml"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.coderbyte.moviemania.ui.home.HomeFragment"
+        android:label="Image Gallery"
+        tools:layout="@layout/fragment_home">
+<!--        <action-->
+<!--            android:id="@+id/action_imageListFragment_to_detailsFragment"-->
+<!--            app:destination="@id/detailsFragment"-->
+<!--            app:enterAnim="@anim/fragment_fade_enter"-->
+<!--            app:exitAnim="@anim/fragment_fade_exit"-->
+<!--            app:popEnterAnim="@anim/fragment_fade_enter"-->
+<!--            app:popExitAnim="@anim/fragment_fade_exit" />-->
+    </fragment>
+<!--    <fragment-->
+<!--        android:id="@+id/detailsFragment"-->
+<!--        android:name="com.bs.androidtest.ui.details.DetailsFragment"-->
+<!--        android:label="Image Gallery"-->
+<!--        tools:layout="@layout/details_fragment">-->
+<!--        <argument-->
+<!--            android:name="id"-->
+<!--            app:argType="string" />-->
+<!--    </fragment>-->
+<!--    <fragment-->
+<!--        android:id="@+id/aboutFragment"-->
+<!--        android:name="com.bs.androidtest.ui.about.AboutFragment"-->
+<!--        android:label="About Us"-->
+<!--        tools:layout="@layout/fragment_about" />-->
+</navigation>

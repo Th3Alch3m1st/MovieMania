@@ -1,0 +1,11 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="try_turning_on_your_wifi">Try turning on your mobile data or wifi</string>
+    <string name="turn_on_mobile_data">Turn on Mobile Data</string>
+    <string name="msg_unknown_exception">Unable to complete request</string>
+    <string name="msg_no_connection">Slow or no internet connection</string>
+    <string name="ooops">Oops!</string>
+    <string name="turn_on_wifi">Turn on Wifi</string>
+    <string name="msg_failed_try_again">Failed! Please try again later</string>
+</resources>

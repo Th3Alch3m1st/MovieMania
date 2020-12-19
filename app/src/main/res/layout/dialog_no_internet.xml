@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivHead"
+        android:layout_width="@dimen/_75sdp"
+        android:layout_height="@dimen/_75sdp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.20"
+        app:srcCompat="@drawable/ic_no_internet" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTitle"
+        style="@style/BoldTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_26sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="@string/ooops"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivHead" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNoInternetConnection"
+        style="@style/NormalTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_11sdp"
+        android:text="@string/no_internet_connection"
+        android:textColor="@color/charcoal_gray"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTurnInternetConnection"
+        style="@style/NormalTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:gravity="center"
+        android:text="@string/try_turning_on_your_wifi"
+        android:textAlignment="center"
+        android:textColor="@color/charcoal_gray"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNoInternetConnection" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnTurnOnMobileData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_75sdp"
+        android:layout_marginBottom="@dimen/_18sdp"
+        android:minWidth="@dimen/_120sdp"
+        android:minHeight="@dimen/_30sdp"
+        android:text="@string/turn_on_mobile_data"
+        android:textAppearance="@style/BoldTextStyle"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTurnInternetConnection" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnTurnOnWifi"
+        style="@style/OutlinedButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:minHeight="@dimen/_30sdp"
+        android:text="@string/turn_on_wifi"
+        android:textAppearance="@style/BoldTextStyle"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintEnd_toEndOf="@+id/btnTurnOnMobileData"
+        app:layout_constraintStart_toStartOf="@+id/btnTurnOnMobileData"
+        app:layout_constraintTop_toBottomOf="@id/btnTurnOnMobileData" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
