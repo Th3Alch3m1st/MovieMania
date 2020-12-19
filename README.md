@@ -1,4 +1,4 @@
-# MovieMania
+# Movie Mania Android App
 Hackathon
 1. Tool to run : Android Studio 4.1.1
 2. Progmamming language : Kotlin
